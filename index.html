@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../message/jquery-message-min.css">
+	<style type="text/css">
+		html, body {
+		}
+	</style>
+</head>
+<body>
+	<button id="log">提示</button>
+	<button id="warn">警告</button>
+	<button id="error">错误</button>
+	<button id="success">成功</button>
+	<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+	<script type="text/javascript" src="../align/jquery-align.js"></script>
+	<script type="text/javascript" src="../message/jquery-message.js"></script>
+	<script type="text/javascript">
+		$('#success').click(function(){
+			$.msg.success({
+				content: '操作成功: asldkfjalsdjfklajsldkfjlkasjdklfjaslkdjflkasjdlkfjsalkdjaf',
+				duration: 2000,
+				closeWhenClick: true
+			});
+		});
+		$('#error').click(function(){
+			$.msg.error({
+				content: '操作失败',
+				duration: 2000,
+				closeWhenClick: true
+			});
+		});
+		$('#warn').click(function(){
+			$.msg.warn({
+				content: '操作有风险',
+				duration: 2000,
+				closeWhenClick: true
+			});
+		});
+		$('#log').click(function(){
+			$.msg.log({
+				content: '操作正在进行',
+				duration: 2000,
+				closeWhenClick: true
+			});
+		});
+
+	</script>
+</body>
+</html>
