@@ -1,14 +1,11 @@
-jQuery(function() {
+(function($) {
 	'use strict';
 	var defaultConfig = {
 		content: '',
 		duration: 5000,
-		css: {
-			message: 'wd-ui-msg wd-ui-log'
-		},
+		css: 'wd-ui-msg wd-ui-log',
 		closeWhenClick: true
 	};
-	var $ = jQuery;
 	var $body = $('body');
 
 	var $msgTpl = $('<div class="wd-msg"></div>');
@@ -56,7 +53,7 @@ jQuery(function() {
 		var $msg = $msgTpl.clone();
 		$msg.hide();
 		$body.append($msg);
-		$msg.addClass(config.css.message).html(config.content).fadeIn();
+		$msg.addClass(config.css).html(config.content).fadeIn();
 		alignMsg($msg, config);
 		if (config.closeWhenClick) {
 			$msg.on('click', function(event){
@@ -72,23 +69,17 @@ jQuery(function() {
 
 	$.msg.success = function(config) {
 		$.msg.log($.extend(true, {}, defaultConfig, {
-			css: {
-				message: 'wd-ui-msg wd-ui-suc'
-			}
+			css: 'wd-ui-msg wd-ui-suc'
 		},config));
 	};
 	$.msg.warn = function(config) {
 		$.msg.log($.extend(true, {}, defaultConfig, {
-			css: {
-				message: 'wd-ui-msg wd-ui-warn'
-			}
+			css: 'wd-ui-msg wd-ui-warn'
 		},config));
 	};
 	$.msg.error = function(config) {
 		$.msg.log($.extend(true, {}, defaultConfig, {
-			css: {
-				message: 'wd-ui-msg wd-ui-err'
-			}
+			css: 'wd-ui-msg wd-ui-err'
 		},config));
 	};
-});
+})(jQuery);
