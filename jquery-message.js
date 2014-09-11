@@ -1,4 +1,15 @@
-(function($) {
+(function(factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define('jquery-message', ['jquery-align'], factory);
+	} else if (typeof exports === 'object') {
+		// Node/CommonJS
+		factory(require('jquery'));
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+}(function($) {
 	'use strict';
 	var defaultConfig = {
 		content: '',
@@ -17,19 +28,19 @@
 	var winHeihgt = $(window).height();
 
 	function close($msg, config) {
-		if($.fn[config.anime + 'Out']) {
+		if ($.fn[config.anime + 'Out']) {
 			$msg[config.anime + 'Out']();
 		}
-		$msg.fadeOut(function(){
+		$msg.fadeOut(function() {
 			$msg.remove();
 			showing--;
 		});
 	}
 
-	function alignMsg($msg, config){
+	function alignMsg($msg, config) {
 		var outerHeight = $msg.outerHeight(true);
 		var outerWidth = $msg.outerWidth(true);
-		if (showing === 0){
+		if (showing === 0) {
 			pos = [0, 0];
 		}
 		showing++;
@@ -40,7 +51,7 @@
 			offset: pos
 		});
 		pos[1] -= outerHeight;
-		if(pos[1] - outerHeight < -winHeihgt){
+		if (pos[1] - outerHeight < -winHeihgt) {
 			pos[1] = 0;
 			pos[0] -= outerWidth;
 		}
@@ -48,7 +59,7 @@
 
 	$.msg = {};
 
-	$.msg.log = function(config){
+	$.msg.log = function(config) {
 		config = $.extend(true, {}, defaultConfig, config);
 		var $msg = $msgTpl.clone();
 		$msg.hide();
@@ -56,12 +67,12 @@
 		$msg.addClass(config.css).html(config.content).fadeIn();
 		alignMsg($msg, config);
 		if (config.closeWhenClick) {
-			$msg.on('click', function(event){
+			$msg.on('click', function(event) {
 				close($(event.target), config);
 			});
 		}
-		if(config.duration && typeof config.duration === 'number'){
-			setTimeout(function(){
+		if (config.duration && typeof config.duration === 'number') {
+			setTimeout(function() {
 				close($msg, config);
 			}, config.duration);
 		}
@@ -70,16 +81,16 @@
 	$.msg.success = function(config) {
 		$.msg.log($.extend(true, {}, defaultConfig, {
 			css: 'wd-ui-msg wd-ui-suc'
-		},config));
+		}, config));
 	};
 	$.msg.warn = function(config) {
 		$.msg.log($.extend(true, {}, defaultConfig, {
 			css: 'wd-ui-msg wd-ui-warn'
-		},config));
+		}, config));
 	};
 	$.msg.error = function(config) {
 		$.msg.log($.extend(true, {}, defaultConfig, {
 			css: 'wd-ui-msg wd-ui-err'
-		},config));
+		}, config));
 	};
-})(jQuery);
+}));
